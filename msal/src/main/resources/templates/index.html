@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentication Demo</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script th:inline="javascript">
+        /*<![CDATA[*/    
+            var msalClientId = /*[[${clientId}]]*/ 'default';
+            var msalTenantId = /*[[${tenantId}]]*/ 'default';
+            var endpointBase = /*[[${endpointBase}]]*/ 'default';
+            var userName = /*[[${userName}]]*/ null;
+        /*]]>*/
+    </script>
+    <script type="text/javascript" src="msal-browser.min.js"></script>
+    <script type="text/javascript" src="auth.js"></script>
+</head>
+<body>
+    <div id="container">
+        <h1>Welcome to the Office 365 Authentication Demo</h1>
+        <div class="auth-section">
+            <div class="authenticated" th:if="${isAuthenticated}">
+                <table>
+                    <tr>
+                        <th>Msal Authentication Request:</th>
+                        <td>
+                            <div class="value-box" th:text="${msalReq}"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Tenant Id:</th>
+                        <td th:text="${tenantId}"></td>
+                    </tr>
+                    <tr>
+                        <th>Client Id:</th>
+                        <td th:text="${clientId}"></td>
+                    </tr>
+                    <tr>
+                        <th>Token:</th>
+                        <td class="value-box" th:text="${accessToken}"></td>
+                    </tr>
+                </table>
+                <div class="bottom-button">
+                    <form action="/whoami" method="get">
+                        <button type="submit">Who Am I?</button>
+                    </form>
+                    <form action="/logout" method="post">
+                        <button type="submit">Logout</button>
+                    </form>
+                </div>
+            </div>
+            <div class="not-authenticated" th:if="${not isAuthenticated}">
+                <button id="signInButton">Sign In</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="welcomeModal" class="modal" th:if="${userName != null}">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>Welcome <span th:text="${userName}"></span>!</p>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="modal.js"></script>
+</body>
+</html>
