@@ -7,7 +7,7 @@ This a Java/Spring Proof Of Concept to demonstrate how to authenticate against A
 
 ## How to start
 
-Edit .env file and replace %**% with the correct values
+Edit application.properties file and replace %**% with the correct values
 
 * %AQUAO_ENDPOINT%
 * %TENANT_ID%
@@ -19,8 +19,20 @@ Before your applications can interact with Azure Active Directory B2C (Azure AD 
 
 https://learn.microsoft.com/en-us/azure/active-directory-b2c/tutorial-register-spa
 
+* Java 17
+* Maven 3.2.3
+
 ### Install
 
+```bash
+mvn clean install
+```
+
+### Start
+
+```bash
+mvn spring-boot:run
+```
 
 ## Authors
 
